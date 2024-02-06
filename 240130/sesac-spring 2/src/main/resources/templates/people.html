@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>이름</th>
+        <th>나이</th>
+    </tr>
+    <tr th:each="item:${people}">
+        <td th:text="${item.name}">이름</td>
+        <td th:text="${item.age}">나이</td>
+    </tr>
+</table>
+</body>
+</html>

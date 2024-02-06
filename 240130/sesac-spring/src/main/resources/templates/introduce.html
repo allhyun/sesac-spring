@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<p th:text="'내 이름은 ' + ${name}">.</p>
+<p th:text="'내 나이는 ' + ${age}">.</p>
+
+<!--<div>-->
+<!--    <form action="/post/prac" method="post">-->
+<!--        <h3> 실습 </h3>-->
+<!--        이름 <input type="text" name="name">-->
+<!--        <br>-->
+<!--        성별 <input type="radio" name ="gender" value ="남자">남자-->
+<!--        <input type="radio" name ="gender" value="여자">여자-->
+<!--        <br>-->
+<!--        생년월일-->
+<!--        <input type="text" name="year">년-->
+<!--        <select name="month" id="month">월-->
+<!--            <option value="month">월</option>-->
+<!--            <option value="month">1월</option>-->
+<!--            <option value="month">2월</option>-->
+<!--            <option value="month">3월</option>-->
+<!--            <option value="month">4월</option>-->
+<!--            <option value="month">5월</option>-->
+<!--            <option value="month">6월</option>-->
+<!--            <option value="month">7월</option>-->
+<!--            <option value="month">8월</option>-->
+<!--            <option value="month">9월</option>-->
+<!--            <option value="month">10월</option>-->
+<!--            <option value="month">11월</option>-->
+<!--            <option value="month">12월</option>-->
+<!--        </select>-->
+<!--        <input type="text" name="day">일-->
+<!--        <br>-->
+<!--        관심사-->
+<!--        <input type="checkbox" name="interest" value="trip">여행-->
+<!--        <input type="checkbox" name="interest" value="fasion">패션-->
+<!--        <input type="checkbox" name="interest" value="food">음식-->
+<!--<br>-->
+<!--        <button type ="submit">제출</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<script>
+    function voResponse(){
+     const form =document.getElementById('form_prac');
+     axios.post(`axios/post/introduce`,{name:form.name.value})
+     .then((res)=>{
+       console.log(res);
+       console.log('voResponse: ' , res.data);
+      });
+    }
+</script>
+<hr>
+<h3>동적폼전송 실습</h3>
+
+<div>
+    <form id="form_prac">
+        <h3> 실습 </h3>
+        이름 <input type="text" name="name">
+        <br>
+        성별 <input type="radio" name ="gender" value ="남자">남자
+        <input type="radio" name ="gender" value="여자">여자
+        <br>
+        생년월일
+        <input type="text" name="year">년
+        <select name="month" id="month">월
+            <option value="month">월</option>
+            <option value="month">1월</option>
+            <option value="month">2월</option>
+            <option value="month">3월</option>
+            <option value="month">4월</option>
+            <option value="month">5월</option>
+            <option value="month">6월</option>
+            <option value="month">7월</option>
+            <option value="month">8월</option>
+            <option value="month">9월</option>
+            <option value="month">10월</option>
+            <option value="month">11월</option>
+            <option value="month">12월</option>
+        </select>
+        <input type="text" name="day">일
+        <br>
+        관심사
+        <input type="checkbox" name="interest" value="trip">여행
+        <input type="checkbox" name="interest" value="fasion">패션
+        <input type="checkbox" name="interest" value="food">음식
+        <br>
+        <button type ="button" onclick="voResponse()">제출</button>
+    </form>
+</div>
+
+</body>
+</html>
