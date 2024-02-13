@@ -13,31 +13,40 @@ import java.util.List;
 @Service
 public class BoardServiece {
     @Autowired
+            //의존성을 주입받은 매퍼를 불러와야한다
     BoardMapper boardMapper;
 
-    public List<BoardDTO> reterieveAll(){
-        List<Board> boards = boardMapper.retreiveAll();
-        List<BoardDTO> result = new ArrayList<>();
 
-        for( Board board: boards){
+
+    public List<BoardDTO> getBoardAll(){
+        List<Board> result = boardMapper.getBoardAll();
+        //실행하고 난 값을 받아온다
+        List<BoardDTO> boards = new ArrayList<>();
+
+        for( Board board: result){
             BoardDTO boardDTO = new BoardDTO();
+            boardDTO.setBoardId(board.getId());
             boardDTO.setTitle(board.getTitle());
-            boardDTO.setContent(board.getContent());
 
-            boardDTO.setWriter(board.getWriter());
+            boardDTO.setNo(100+ board.getId());
 //            boardDTO.setContent(board.getContent());
 
-            result.add(boardDTO);
+            boards.add(boardDTO);
 
         }
-        return result;
+        return boards;
 
     }
 
-    public void createBoard(
-            String title, String content, String writer
-    ){
-        boardMapper.createBoard(title,content,writer);
-    }
+    public boolean insertBoard(BoardDTO boardDTO){
+        Board board = new Board();
+        board.setTitle(boardDTO.getTitle());
+        board.setContent(boardDTO.getContent());
+        board.setWriter(boardDTO.getWriter());
+        board.setWriter(boardDTO.getWriter());
+        //domain에있는걸 담는것
 
+        boardMapper.insertBoard(board);
+        return true;
+    }
 }

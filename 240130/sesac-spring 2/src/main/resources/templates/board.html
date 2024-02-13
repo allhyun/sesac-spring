@@ -9,7 +9,7 @@
             // 검색어가 있으면 일치하는 제목의 개수를 가져오고
             // 검색어가 없으면 전체 게시글이 몇 개인지 가져온다.
             var form = document.getElementById('form_search');
-            axios.get(`/board/search?word=${form.word.value}`).then((res) => {
+            axios.get(`/board/mybatis?word=${form.word.value}`).then((res) => {
                 alert('일치하는 제목의 게시글은 ' + res.data + '개 입니다.');
             });
         }
@@ -23,7 +23,7 @@
                 writer: form.writer.value,
             };
 
-            axios.post(`/board`, data).then((res) => {
+            axios.post(`/board/mybatis`, data).then((res) => {
                 location.reload();
             });
         }
@@ -35,12 +35,12 @@
                 content: form.content.value,
                 writer: form.writer.value,
             };
-            axios.patch(`/board`, data).then((res) => {
+            axios.patch(`/board/mybatis`, data).then((res) => {
                 location.reload();
             });
         }
         function deleteBoard(id) {
-            axios.delete(`/board?id=${id}`).then((res) => {
+            axios.delete(`/board/mybatis?id=${id}`).then((res) => {
                 location.reload();
             });
         }
@@ -72,6 +72,17 @@
         <th>삭제</th>
     </tr>
     <!--    타임리프 문법 이용해서 게시판 글 보여주기 -->
+
+    <tr th:each="board:${list}">
+        <td th:text="${board.getNo()}">번호</td>
+        <td th:text="${board.getBoardID()}">ID</td>
+        <td th:text="${board.getTitle()}">제목</td>
+        <td th:text="${board.getWriter()}">작성자</td>
+        <td th:text="${board.getRegistered()}">작성일</td>
+        <td th:onclick="editBoard([[${board.getBoardID()}]])">수정</td>
+        <td th:onclick="deleteBoard([[${board.getBoardID()}]])">삭제</td>
+    </tr>
+
 </table>
 </body>
 </html>

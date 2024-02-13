@@ -4,8 +4,12 @@
 
 <!--xml 파일 작성법-->
 <mapper namespace="com.sesac.sesacspring.mapper.BoardMapper">
-    <select id="retreiveAll"
+    <select id="getBoardAll"
             resultType="com.sesac.sesacspring.domain.Board">
         SELECT user.* FROM board
     </select>
+    <insert id="insertBoard" parameterType="com.sesac.sesacspring.domain.Board">
+        INSERT INTO board(title,content,writer)
+        VALUES(#{title}, #{content}, #{writer})
+    </insert>
 </mapper>
